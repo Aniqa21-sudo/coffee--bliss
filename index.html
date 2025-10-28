@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Bliss</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Arial',sans-serif;scroll-behavior:smooth;}
+body{background:#f5f0e1;color:#333;}
+a{text-decoration:none;}
+nav{position:fixed;top:0;width:100%;padding:15px 50px;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);box-shadow:0 2px 10px rgba(0,0,0,0.3);z-index:1000;transition:.3s;}
+nav.scrolled{background:rgba(0,0,0,0.85);padding:10px 50px;}
+.logo{font-size:1.5rem;color:#fff;font-weight:bold;display:flex;align-items:center;}
+.logo .bean{margin-left:5px;animation:float 2s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}25%{transform:translateY(-4px) rotate(-10deg);}75%{transform:translateY(-4px) rotate(10deg);}}
+.nav-links a{color:#fff;margin-left:25px;font-weight:600;position:relative;}
+.nav-links a::after{content:'';position:absolute;width:0;height:2px;left:0;bottom:-4px;background:#d4a373;transition:.3s;}
+.nav-links a:hover::after{width:100%;}
+.nav-links a:hover{color:#d4a373;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{width:25px;height:3px;background:#fff;border-radius:3px;transition:.3s;}
+.hamburger.toggle span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.hamburger.toggle span:nth-child(2){opacity:0;}
+.hamburger.toggle span:nth-child(3){transform:rotate(-45deg) translate(6px,-6px);}
+@media(max-width:768px){
+.nav-links{position:fixed;top:60px;right:-100%;background:rgba(0,0,0,0.9);height:100%;width:200px;flex-direction:column;align-items:center;padding-top:30px;gap:25px;transition:.3s;}
+.nav-links.active{right:0;}
+.hamburger{display:flex;}
+.nav-links a{margin:0;font-size:1.2rem;}
+}
+.hero{height:100vh;background:url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;display:flex;justify-content:center;align-items:center;color:#fff;text-align:center;position:relative;}
+.hero::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);}
+.hero-content{position:relative;z-index:2;animation:fadeIn 2s ease;}
+.hero-content h1{font-size:3rem;margin-bottom:20px;}
+.hero-content p{font-size:1.3rem;margin-bottom:30px;}
+.hero-content .btn{background:#d4a373;color:#fff;padding:14px 30px;border-radius:30px;font-weight:bold;transition:.3s;}
+.hero-content .btn:hover{transform:scale(1.05);}
+section{padding:80px 20px;text-align:center;}
+h2{font-size:2.5rem;margin-bottom:30px;color:#6f4f1f;}
+.menu-items{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:25px;max-width:1200px;margin:0 auto;}
+.menu-item{background:#fff;border-radius:15px;overflow:hidden;box-shadow:0 6px 15px rgba(0,0,0,0.2);transition:.3s;opacity:0;transform:translateY(20px);}
+.menu-item.show{opacity:1;transform:translateY(0);}
+.menu-item img{width:100%;height:180px;object-fit:cover;transition:.3s;}
+.menu-item img:hover{transform:scale(1.05);}
+.menu-item-content{padding:15px;}
+.menu-item h3{color:#6f4f1f;margin-bottom:8px;}
+.menu-item p{font-size:.9rem;margin-bottom:10px;}
+.menu-item span{font-weight:bold;color:#d4a373;}
+.contact form{max-width:450px;margin:0 auto;display:flex;flex-direction:column;gap:15px;}
+.contact input,.contact textarea{padding:12px;border-radius:8px;border:1px solid #ccc;font-size:1rem;}
+.contact button{padding:14px;border:none;border-radius:8px;background:#d4a373;color:#fff;font-size:1rem;cursor:pointer;transition:.3s;}
+.contact button:hover{transform:scale(1.05);}
+footer{background:#6f4f1f;color:#fff;padding:40px 20px;}
+footer .footer-content{max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;}
+footer .socials a{margin:0 10px;color:#fff;font-size:1.5rem;transition:.3s;}
+footer .socials a:hover{color:#d4a373;}
+footer p{flex-basis:100%;text-align:center;margin-top:15px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@media(max-width:768px){.hero-content h1{font-size:2.2rem;}.hero-content p{font-size:1rem;}section{padding:60px 15px;}}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="logo"><img src="https://img.icons8.com/ios-filled/50/ffffff/coffee.png" alt="logo" style="height:28px;margin-right:8px;">Coffee Bliss <span class="bean">☕</span></div>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  <div class="nav-links" id="nav-links">
+    <a href="#about">About</a>
+    <a href="#menu">Menu</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Welcome to Coffee Bliss</h1>
+    <p>Experience the finest coffee blends crafted just for you.</p>
+    <a href="#menu" class="btn">Explore Our Menu</a>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <h2>About Us</h2>
+  <p>At Coffee Bliss, every cup tells a story. From hand-picked beans to masterful roasting, we create the perfect coffee experience for every enthusiast.</p>
+</section>
+
+<section class="menu" id="menu">
+  <h2>Our Coffee Menu</h2>
+  <div class="menu-items">
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1645445644664-8f44112f334c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8ZXhwcmVzc28lMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D"><div class="menu-item-content"><h3>Espresso</h3><p>Strong and bold shot of pure coffee.</p><span>$3.00</span></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1630021439100-74a32ab42d3e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fGxhdHRlJTIwY29mZmVlfGVufDB8fDB8fHww"><div class="menu-item-content"><h3>Latte</h3><p>Silky smooth espresso with steamed milk.</p><span>$4.50</span></div></div>
+    <div class="menu-item"><img src="https://plus.unsplash.com/premium_photo-1694162853929-33737285a16f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGNhcHB1Y2Npbm8lMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D"><div class="menu-item-content"><h3>Cappuccino</h3><p>Perfect blend of espresso, milk & foam.</p><span>$4.00</span></div></div>
+    <div class="menu-item"><img src="https://media.istockphoto.com/id/2158812697/photo/high-angle-view-of-a-cup-of-black-coffee-on-a-wooden-table-beside-a-window.webp?a=1&b=1&s=612x612&w=0&k=20&c=Fbl1S8oeHhoxcTbG9QbSlXA-ugIFNv5vHqrspahoQNA="><div class="menu-item-content"><h3>Americano</h3><p>Espresso with hot water for smooth taste.</p><span>$3.50</span></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1619286310410-a95de97b0aec?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1vY2hhJTIwY29mZmVlfGVufDB8fDB8fHww"><div class="menu-item-content"><h3>Mocha</h3><p>Chocolate, espresso & milk in harmony.</p><span>$4.75</span></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1686860633705-52054227718b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fE1hY2NoaWF0byUyMGNvZmZlfGVufDB8fDB8fHww"><div class="menu-item-content"><h3>Macchiato</h3><p>Espresso topped with a dash of foam.</p><span>$3.75</span></div></div>
+    <div class="menu-item"><img src="https://media.istockphoto.com/id/183138035/photo/cup-of-latte-coffee-and-spoon-on-gray-counter.webp?a=1&b=1&s=612x612&w=0&k=20&c=zhL7nLKd9grMx5v2_pTL1KeV_akb1Y-GeO3W_TleFnE="><div class="menu-item-content"><h3>Flat White</h3><p>Creamy milk with velvety espresso.</p><span>$4.25</span></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1549652127-2e5e59e86a7a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y29sZCUyMGJyZXclMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D"><div class="menu-item-content"><h3>Cold Brew</h3><p>Slow brewed coffee, smooth & chilled.</p><span>$4.50</span></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1702165637225-2f43e0246a2c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fEljZWQlMjBMYXR0ZSUyMGNvZmZlZXxlbnwwfHwwfHx8MA%3D%3D"><div class="menu-item-content"><h3>Iced Latte</h3><p>Espresso & milk poured over ice.</p><span>$4.25</span></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1696522692156-7340b681c3bb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8QWZmb2dhdG8lMjBjb2ZmZWV8ZW58MHx8MHx8fDA%3D"><div class="menu-item-content"><h3>Affogato</h3><p>Espresso poured over vanilla ice cream.</p><span>$5.00</span></div></div>
+    <div class="menu-item"><img src="https://images.unsplash.com/photo-1730190977839-1c8b5f704ac4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fElyaXNoJTIwQ29mZmVlfGVufDB8fDB8fHww"><div class="menu-item-content"><h3>Irish Coffee</h3><p>Coffee blended with whiskey and cream.</p><span>$6.00</span></div></div>
+   
+</section>
+
+<section class="contact" id="contact">
+  <h2>Contact Us</h2>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <div class="logo"> ☕ Coffee Bliss</div>
+    <div class="socials">
+      <a href="#"><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+    </div>
+  </div>
+  <p>&copy; 2025 Coffee Bliss. All rights reserved.</p>
+</footer>
+
+<script>
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll',()=>{if(window.scrollY>50)navbar.classList.add('scrolled');else navbar.classList.remove('scrolled');});
+const menuItems = document.querySelectorAll('.menu-item');
+function revealMenuItems(){const trigger=window.innerHeight*0.85;menuItems.forEach(item=>{if(item.getBoundingClientRect().top<trigger){item.classList.add('show');}});}
+window.addEventListener('scroll',revealMenuItems);window.addEventListener('load',revealMenuItems);
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('nav-links');
+hamburger.addEventListener('click',()=>{navLinks.classList.toggle('active');hamburger.classList.toggle('toggle');});
+</script>
+
+</body>
+</html>
